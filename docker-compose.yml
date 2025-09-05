@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  backend:
+    image: ${DOCKER_REGISTRY}/${BACKEND_IMAGE}:${TAG}
+    restart: always
+    env_file:
+      - ./backend.env   # create this on the host (secrets)
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+
+  frontend:
+    image: ${DOCKER_REGISTRY}/${FRONTEND_IMAGE}:${TAG}
+    restart: always
+    ports:
+      - "80:80"
+
+  mongo:
+    image: mongo:6
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+volumes:
+  mongo-data:
