@@ -12,3 +12,4 @@ COPY backend/ .   # copy backend source code
 ENV NODE_ENV=production
 EXPOSE 5000
 CMD ["node", "server.js"]
+
